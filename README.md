@@ -47,11 +47,17 @@ python timestamp_convert.py -i F:\Data\000001\timestamp.txt
 **Tips**：和h5文件一样，生成的时间戳会自动覆盖上次的记录。
 
 ## STEP 3
-
-最后运行下面的代码开始重建，你需要的结果会存放在指定路径下（`NAME_YOU_WANT`）
+接下来运行下面的代码开始重建，你需要的结果会存放在指定路径下（`NAME_YOU_WANT`）
 ```bash
 python python\offline_reconstruction.py --dataset_name NAME_YOU_WANT --upsample_rate 2 --h5file .\h5data\event.h5 --output_folder .\output --timestamps_file timestamp_convert.txt --height 720 --width 1280 --use_gpu
 ```
+
+## STEP 4
+最后，由于分光镜将事件模态进行了左右翻转，我们需要用`reverse_rename.py`将重建结果翻回来并重命名。
+
+**Tips**：
+1、代码中的 input_foler 和 output_folder 分别指重建图文件夹路径和处理后的路径，需要直接在代码上修改。
+2、如果你用的是低光双模三相机系统，那就不需要将事件左右翻转，而应该翻转帧图像，在那个项目的步骤中有具体操作，跳过本文档的STEP4即可。
 
 ## WARNING !
 有必要提醒一下，以上步骤是针对我们实验室多模态系统采集软件设计的。
